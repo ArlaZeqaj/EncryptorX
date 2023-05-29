@@ -53,6 +53,8 @@ To run tests, add the following condition (remove the comment lines) in the main
     }
 ```
 The testing option will be added to the main menu.
+## ⚡ Documentation
+https://docs.google.com/document/d/19Y8TvLP-sawUzcq61amg7UBUkM1zgsgl7w2VdODIOLQ/edit?usp=sharing
 
 ## :flying_saucer: Authors
 #### The Hackstreet Boys Team :bulb: 
