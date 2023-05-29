@@ -28,12 +28,12 @@ To check if GCC is installed, open a terminal or command prompt and run the foll
 ### Step 2: Set Up the Development Environment
 
 
-- Open a C/C++ IDE to run app (like CodeBlocks).
+- Open a C/C++ IDE to run the app (like CodeBlocks).
 - Download the ZIP file from the repository https://github.com/ArlaZeqaj/EncryptorX.git 
 - Extract the ZIP file and open the app folder with the IDE of choice
 
 ### Step 3: Compile and run the code 
-If you are using CodeBlocks (and most other IDEs), you have to build the main.c file and then sipmly run the code on your PC.  
+If you are using CodeBlocks (and most other IDEs), you have to build the main.c file and then simply run the code on your PC.  
 ## Usage
 
 1. Execute the app after installation.
@@ -45,16 +45,21 @@ If you are using CodeBlocks (and most other IDEs), you have to build the main.c 
 
 ## Running Tests
 
-To run tests, add the following function (remove the comment lines) from main file:
+To run tests, add the following condition (remove the comment lines) in the main file:
 
 ```bash
-  testRSAEncryption();
+  else if (number == 7){
+            testRSAEncryption();
+    }
 ```
 The testing option will be added to the main menu.
 
 ## Authors
 
-- [@octokatherine](https://www.github.com/octokatherine)
+- [@ArlaZeqaj](https://github.com/ArlaZeqaj)
+- [@estela-mele](https://github.com/estela-mele)
+- [@ildalama](https://github.com/ildalama)
+
 
 
 ## 🚀 Contact
