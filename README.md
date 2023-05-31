@@ -3,7 +3,6 @@
 EncryptorX is a simple application that allows you to encrypt and decrypt text messages using the RSA cryptographic algorithm. It provides a command-line interface for navigating and different encryption and decryption options.
 
 
-
 ## :telescope: Features
 
 - **Key Generation**: Generate secure public encryption key to be used for encypting any plain text, with the given values of p and q
@@ -13,6 +12,7 @@ EncryptorX is a simple application that allows you to encrypt and decrypt text m
 - **Sentence decryption**: Decrypt a long sentence to original plaintext
 - **File encryption**: Translate a text file to an encrypted file
 
+![enrcyptorX](https://github.com/ArlaZeqaj/EncryptorX/assets/98120709/68986fa9-fbd3-4d42-b3d4-4519b8d357d4)
 
 ## :wrench: Installation
 
@@ -43,6 +43,8 @@ If you are using CodeBlocks (and most other IDEs), you have to build the main.c 
 5. Follow the on-screen instructions to complete the process.
 6. Copy the encrypted or decrypted message to the clipboard for further use if needed.
 
+![image](https://github.com/ArlaZeqaj/C-calculator/assets/98120709/4dcc16b9-090a-4b0d-8d08-f6a7e484839d)
+
 ## :woman_technologist: Running Tests
 
 To run tests, add the following condition (remove the comment lines) in the main file:
@@ -54,7 +56,11 @@ To run tests, add the following condition (remove the comment lines) in the main
 ```
 The testing option will be added to the main menu.
 ## ⚡ Documentation
-[Link to documentation](https://docs.google.com/document/d/19Y8TvLP-sawUzcq61amg7UBUkM1zgsgl7w2VdODIOLQ/edit?usp=sharing
+[Link to Documentation](https://docs.google.com/document/d/19Y8TvLP-sawUzcq61amg7UBUkM1zgsgl7w2VdODIOLQ/edit?usp=sharing
+) 
+
+## :ringed_planet: Product Requirements
+[Link to Product Requirements](https://docs.google.com/document/d/1KsjJVx-ujar7jeqSswyVnsk0hvvCIQcu-JajbgqInwA/edit
 ) 
 
 ## :flying_saucer: Authors
