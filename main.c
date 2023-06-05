@@ -67,42 +67,16 @@ long private_key(long e, int lambda_n)
     return -1;
 }
 
-// Decryption of a message
-char* rsaDecrypt(char* cipher, long d, long n)
 {
     createAlphabet();
     long index;
     long i;
     long len = strlen(cipher);
-    char* message = (char*)malloc((len + 1) * sizeof(char)); // Include space for null terminator
-    for (i = 0; i < len; i++)
-    {
-        if (cipher[i] == ' ')
-        {
-            message[i] = ' '; // Preserve space character
-        }
-        else
-        {
-            index = 0;
-            while (alphabet[index] != cipher[i])
-            {
-                index++;
-            }
-            message[i] = pomod(index, d, n);
-        }
-    }
-    message[len] = '\0'; //null terminator
-    return message;
-}
-
-
 int main()
 {
     system("COLOR 02");
     int p = 7, q = 19, lambda_n, P, Q, lambda_N;
     long n, e, d, N;
-    char* mgs;
-    char* text;
     printf("\n\
          _______  _        _______  _______           _______ _________ _______  _______             \n\
         (  ____ \\( (    /|(  ____ \\(  ____ )|\\     /|(  ____ )\\__   __/(  ___  )(  ____ )  |\\     /| \n\
@@ -174,19 +148,7 @@ int main()
                 }
             }
         }
-        else if (number == 3)
-        {
-            printf("\n\t~Enter d (public key): ");
-            scanf("%ld", &d);
-            printf("\n\t~Enter n (modulus): ");
-            scanf("%ld", &n);
-            printf("\n\t~Enter the message: ");
-            mgs = (char*)malloc(sizeof(char) * 100);
-            scanf("%s", mgs);
-            text = rsaDecrypt(mgs, d, n);
-            printf("\n\t~The original message was: %s\n", text);
-            free(text);
-            free(mgs);
+
         }
         else
         {
@@ -196,4 +158,3 @@ int main()
 
     return 0;
 }
-
