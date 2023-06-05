@@ -239,6 +239,59 @@ char* RSAdecryptSentence(char* encrySentence, long d, long n)
     return sentence;
 }
 
+//Encryption of a sentence
+char* RSAencryptFile(char* sentence, long e, long n)
+{
+    createAlphabet();
+    long index;
+    long i;
+    long len = strlen(sentence);
+    char* encry = (char*)malloc((len + 1) * sizeof(char)); // Include space for null terminator
+    for (i = 0; i < len; i++)
+    {
+        if (sentence[i] == ' ')
+        {
+            encry[i] = ' '; // Preserve space character
+        }
+        else
+        {
+            index = pomod(sentence[i], e, n);
+            encry[i] = alphabet[index];
+        }
+    }
+    encry[len] = '\0'; // Add null terminator to the cipher string
+    return encry;
+}
+
+//Getting text from file
+char* readFile() {
+    FILE* file = fopen("message.txt", "r");
+    if (file == NULL) {
+        printf("Failed to open the file.\n");
+        exit(1);
+    }
+
+    char* text = (char*)malloc(sizeof(char) * MAX_LENGTH);
+    if (fgets(text, MAX_LENGTH, file) == NULL) {
+        printf("Failed to read from the file.\n");
+        exit(1);
+    }
+
+    fclose(file);
+    return text;
+}
+
+//Writing encrypted text to a new file
+void storeSentenceInFile(const char* text) {
+    FILE* file = fopen("secret.txt", "w");
+    if (file == NULL) {
+        printf("Failed to open the file.\n");
+        return;
+    }
+    fprintf(file, "%s", text);
+    fclose(file);
+}
+
 int main(void)
 {
     system("COLOR 02");
@@ -410,6 +463,32 @@ int main(void)
             printf("\n\t~The original sentence was: %s\n", decryptedSentence);
             free(decryptedSentence);
             free(encrySentence);
+        }
+        else if (number == 6)
+        {
+            n = p * q;
+            lambda_n = totient(p, q);
+            e = randome(lambda_n);
+            d = private_key(e, lambda_n);
+            file_text = readFile();
+            encryptSentence = RSAencryptFile(file_text, e, n);
+            printf("\n\t~The file was encrypted successfully!\n");
+            printf("\n\t~The encrypted text is: %s\n", encryptSentence);
+            storeSentenceInFile(encryptSentence);
+            printf("\n\t~~~DO YOU WISH TO DECRYPT THE TEXT (yes/no): ");
+            scanf("%s", choice1);
+            if (!strcmp(choice1, "yes"))
+            {
+                char* decryptedText = RSAdecrypt(encryptSentence, d, n);
+                printf("\n\t~The original text was: %s\n", decryptedText);
+                free(decryptedText);
+            }
+            else
+            {
+                printf("T-T\n");
+            }
+            free(file_text);
+            free(encryptSentence);
         }
         else
         {
