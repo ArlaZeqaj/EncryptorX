@@ -55,21 +55,6 @@ int public_key(int lambda_n)
     return -1;
 }
 
-int randome(int lambda_n)
-{
-    srand((unsigned int)time(NULL));
-    while (1)
-    {
-        int num = (rand() % (lambda_n - 5 + 1)) + 5;
-        if (isPrime(num) == 1)
-        {
-            return num;
-            break;
-        }
-    }
-    return -1;
-}
-
 long private_key(long e, int lambda_n)
 {
     for (long i = 1; i < lambda_n; i++)
@@ -82,71 +67,16 @@ long private_key(long e, int lambda_n)
     return -1;
 }
 
-long pomod(long a, long b, long m)
-{
-    long x = 1, y = a;
-    while (b > 0)
-    {
-        if (b % 2 == 1)
-        {
-            x = (x * y) % m;
-        }
-        y = (y * y) % m;
-        b /= 2;
-    }
-    return x % m;
-}
-
-char* rsaEncrypt(char* message, long e, long n)
-{
-    createAlphabet();
-    long index;
-    long i;
-    long len = strlen(message);
-    char* cipher = (char*)malloc(len * sizeof(char));
-    for (i = 0; i < len; i++)
-    {
-        index = pomod(message[i], e, n);
-        cipher[i] = alphabet[index];
-    }
-    return cipher;
-}
-
-char* decrypt(char* cipher, long d, long n)
 {
     createAlphabet();
     long index;
     long i;
     long len = strlen(cipher);
-    char* message = (char*)malloc(len * sizeof(char));
-    for (i = 0; i < len; i++)
-    {
-        index = 0;
-        while (alphabet[index] != cipher[i])
-        {
-            index++;
-        }
-        message[i] = pomod(index, d, n);
-    }
-    return message;
-}
-
 int main()
 {
     system("COLOR 02");
     int p = 7, q = 19, lambda_n, P, Q, lambda_N;
     long n, e, d, N;
-    char* message;
-    char* mgs;
-    char* text;
-    char* cipher;
-    char* sentence;
-    char* file_text;
-    char* encryptSentence;
-    char* encrySentence;
-    char choice[10];
-    char choice1[10];
-    createAlphabet();
     printf("\n\
          _______  _        _______  _______           _______ _________ _______  _______             \n\
         (  ____ \\( (    /|(  ____ \\(  ____ )|\\     /|(  ____ )\\__   __/(  ___  )(  ____ )  |\\     /| \n\
@@ -218,33 +148,7 @@ int main()
                 }
             }
         }
-        else if (number == 2)
-        {
-            n = p * q;
-            lambda_n = totient(p, q);
-            e = randome(lambda_n);
-            d = private_key(e, lambda_n);
-            printf("\n\tThe value of public key is %ld and modulus is %ld\n", d, n);
-            message = (char*)malloc(sizeof(char) * 100);
-            printf("\n\t~Enter the message: ");
-            scanf("%s", message);
-            cipher = rsaEncrypt(message, e, n);
-            printf("\n\t~The encrypted message is: %s\n", cipher);
-            printf("\n\t~~~DO YOU WISH TO DECRYPT THE MESSAGE (yes/no): "); 
-            scanf("%s", choice);
 
-            if (!strcmp(choice, "yes"))
-            {
-                message = decrypt(cipher, d, n);
-                printf("\n\t~The original message was: %s\n", message);
-            }
-            else
-            {
-                printf("T-T\n");
-            }
-
-            free(message);
-            free(cipher);
         }
         else
         {
