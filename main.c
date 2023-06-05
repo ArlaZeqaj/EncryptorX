@@ -70,6 +70,18 @@ int randome(int lambda_n)
     return -1;
 }
 
+long private_key(long e, int lambda_n)
+{
+    for (long i = 1; i < lambda_n; i++)
+    {
+        if ((i * e) % lambda_n == 1)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 long pomod(long a, long b, long m)
 {
     long x = 1, y = a;
@@ -100,7 +112,26 @@ char* rsaEncrypt(char* message, long e, long n)
     return cipher;
 }
 
-int main(void)
+char* decrypt(char* cipher, long d, long n)
+{
+    createAlphabet();
+    long index;
+    long i;
+    long len = strlen(cipher);
+    char* message = (char*)malloc(len * sizeof(char));
+    for (i = 0; i < len; i++)
+    {
+        index = 0;
+        while (alphabet[index] != cipher[i])
+        {
+            index++;
+        }
+        message[i] = pomod(index, d, n);
+    }
+    return message;
+}
+
+int main()
 {
     system("COLOR 02");
     int p = 7, q = 19, lambda_n, P, Q, lambda_N;
@@ -199,6 +230,19 @@ int main(void)
             scanf("%s", message);
             cipher = rsaEncrypt(message, e, n);
             printf("\n\t~The encrypted message is: %s\n", cipher);
+            printf("\n\t~~~DO YOU WISH TO DECRYPT THE MESSAGE (yes/no): "); 
+            scanf("%s", choice);
+
+            if (!strcmp(choice, "yes"))
+            {
+                message = decrypt(cipher, d, n);
+                printf("\n\t~The original message was: %s\n", message);
+            }
+            else
+            {
+                printf("T-T\n");
+            }
+
             free(message);
             free(cipher);
         }
