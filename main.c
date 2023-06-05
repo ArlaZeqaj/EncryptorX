@@ -96,7 +96,7 @@ char* rsaDecrypt(char* cipher, long d, long n)
 }
 
 
-int main()
+int main(void)
 {
     system("COLOR 02");
     int p = 7, q = 19, lambda_n, P, Q, lambda_N;
