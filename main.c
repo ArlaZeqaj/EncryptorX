@@ -292,6 +292,62 @@ void storeSentenceInFile(const char* text) {
     fclose(file);
 }
 
+
+// Testing function
+void testRSAEncryption()
+{
+    // Test case 1 (encryption)
+    char* message1;
+    int p1 = 7;
+    int q1 = 19;
+    long n1 = p1 * q1;
+    int lambda_n1 = totient(p1, q1);
+    long e1 = randome(lambda_n1);
+    long d1 = private_key(e1, lambda_n1);
+    message1 = (char*)malloc(sizeof(char) * 100);
+
+    printf("\n\tTest Case 1 (encryption):\n");
+    printf("\n\tThe value of public key is %ld and modulus is %ld\n", d1, n1);
+    printf("\n\t~Enter the message: ");
+    scanf("%s", message1);
+
+    char* cipher1 = rsaEncrypt(message1, e1, n1);
+    char* decrypted1 = decrypt(cipher1, d1, n1);
+
+    printf("\n\tThe message you entered is: %s\n", message1);
+    printf("\n\tThe message encrypted is: %s\n", cipher1);
+    printf("\n\tThe message decrypted is: %s\n", decrypted1);
+    printf("\n");
+
+    // Test case 2 (decryption)
+    char* cipher2;
+    long d2, n2;
+
+    printf("\n\tTest Case 2 (decryption):\n");
+    printf("\n\t~Enter d (public key): ");
+    scanf("%ld", &d2);
+
+    printf("\n\t~Enter n (modulus): ");
+    scanf("%ld", &n2);
+
+    printf("\n\t~Enter the message: ");
+    cipher2 = (char*)malloc(sizeof(char) * 100);
+    scanf("%s", cipher2);
+
+    char* decrypted2 = decrypt(cipher2, d2, n2);
+
+    printf("\n\tThe message you entered is: %s\n", cipher2);
+    printf("\n\tThe message decrypted is: %s\n", decrypted2);
+    printf("\n\tThe message encrypted is: %s\n", cipher2);
+    printf("\n");
+
+    // Clean up memory
+    free(cipher1);
+    free(decrypted1);
+    free(cipher2);
+    free(decrypted2);
+}
+
 int main(void)
 {
     system("COLOR 02");
@@ -489,6 +545,10 @@ int main(void)
             }
             free(file_text);
             free(encryptSentence);
+        }
+        else if (number == 7)
+        {
+            testRSAEncryption();
         }
         else
         {
